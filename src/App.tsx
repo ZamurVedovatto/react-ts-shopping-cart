@@ -1,19 +1,18 @@
-import { useState } from 'react'
-import ListGroup from 'react-bootstrap/ListGroup';
-import './App.css'
+import { Routes, Route } from "react-router-dom"
+import { Container } from "react-bootstrap"
+import { Home } from "./pages/Home"
+import { Store } from "./pages/Store"
+import { About } from "./pages/About"
 
 function App() {
-
   return (
-    <div className="App">
-      <ListGroup>
-        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-      </ListGroup>
-    </div>
+    <Container className="mb-4">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/store" element={<Store />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Container>
   )
 }
 
