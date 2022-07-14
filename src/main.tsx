@@ -5,7 +5,6 @@ import { BrowserRouter } from "react-router-dom"
 
 import "./main.css"
 import "bootstrap/dist/css/bootstrap.min.css"
-import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
