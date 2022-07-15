@@ -4,10 +4,9 @@ import { Container, Card, Form, FloatingLabel, Button} from 'react-bootstrap'
 import { useCandidate } from "../context/CandidateContext"
 import formFields from "./../data/form-fe.json"
 
-const FeedbackFormComp = styled.section`
-`
+const FeedbackFormComp = styled.section``
 
-function RadioField ({ max }) {
+function RadioField (max:any) {
   return (
     <Form.Group controlId="formBasicCheckbox">
       {[...Array(max)].map((x, i) =>
@@ -32,16 +31,16 @@ export function FeedbackForm() {
       <Container>
         <Card>
           <Card.Header className="d-flex justify-content-between">
-            <span className="fw-bold text-uppercase">{selectedCandidate.name} </span>
-            <span>{selectedCandidate.date} - {selectedCandidate.time}</span>
+            <span className="fw-bold text-uppercase">{selectedCandidate?.name} </span>
+            <span>{selectedCandidate?.date} - {selectedCandidate?.time}</span>
           </Card.Header>
           <Card.Body className="p-4">
             <Form>
               {
                 formFields?.map((field) => (
-                  <Form.Group key={field.title} className="mb-2" controlId="formBasicEmail">
-                    <Form.Label className="pe-3">{field.title}</Form.Label>
-                    <RadioField max={field.max}></RadioField>
+                  <Form.Group key={field?.title} className="mb-2" controlId="formBasicEmail">
+                    <Form.Label className="pe-3">{field?.title}</Form.Label>
+                    <RadioField max={field?.max}></RadioField>
                   </Form.Group>
                 ))
               }

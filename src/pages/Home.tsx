@@ -37,7 +37,7 @@ export function Home() {
     <SectionWrapper>
       <HomeComp>
         {
-          (selectedCandidate === null) ? (
+          (!selectedCandidate) ? (
             <ListGroup as="ol">
               {
                 candidates.map(cand => (

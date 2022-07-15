@@ -23,8 +23,8 @@ type CandidateContext = {
   openCart: () => void
   closeCart: () => void
 
-  selectedCandidate: CandidateType,
-  onSetSelectedCandidate: (selected: CandidateType) => void
+  selectedCandidate: CandidateType | null
+  onSetSelectedCandidate: (selected: CandidateType| null) => void
 }
 
 const CandidateContext = createContext({} as CandidateContext)
@@ -41,8 +41,8 @@ export function CandidateProvider({ children }: CandidateProviderProps) {
   const closeCart = () => setIsOpen(false)
 
 
-  function onSetSelectedCandidate(selected: CandidateType) {
-    setSelectedCandidate(selected)
+  function onSetSelectedCandidate(selected: any) {
+    selected ? setSelectedCandidate(selected) : setSelectedCandidate(null)
   }
 
   return (
