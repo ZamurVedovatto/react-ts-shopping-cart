@@ -1,0 +1,12 @@
+[
+    {
+        "type": "radio",
+        "title": "HTML",
+        "max": 10
+    },
+    {
+        "type": "radio",
+        "title": "CSS/SCSS",
+        "max": 10
+    }
+]

@@ -1,8 +1,11 @@
 import { ListGroup, Button } from 'react-bootstrap'
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink } from "react-router-dom"
 import { SectionWrapper } from './../assets/styles/index'
+import { FeedbackForm } from './../components/FeedbackForm'
+import { useCandidate } from "../context/CandidateContext"
+import candData from "./../data/candidatesData.json"
 
 const HomeComp = styled.section`
   li {
@@ -22,79 +25,46 @@ const HomeComp = styled.section`
   }
 `
 
-const candData = [
-  {
-    name: "Zamur Borges Vedovatto",
-    date: "14/07/2022",
-    time: "15:30",
-    active: true,
-    feedback: false
-  },
-  {
-    name: "Zamur Borges Vedovatto",
-    date: "14/07/2022",
-    time: "15:30",
-    active: true,
-    feedback: true
-  },
-  {
-    name: "Zamur Borges Vedovatto",
-    date: "14/07/2022",
-    time: "15:30",
-    active: false,
-    feedback: false
-  },
-  {
-    name: "Zamur Borges Vedovatto",
-    date: "14/07/2022",
-    time: "15:30",
-    active: false,
-    feedback: false
-  },
-  {
-    name: "Zamur Borges Vedovatto",
-    date: "14/07/2022",
-    time: "15:30",
-    active: false,
-    feedback: false
-  }
-]
-
 export function Home() {
+  const { selectedCandidate, onSetSelectedCandidate } = useCandidate()
   const [candidates, setCandidates] = useState(candData)
 
+  useEffect(() => {
+    onSetSelectedCandidate(null)
+  }, [])
+  
   return (
     <SectionWrapper>
       <HomeComp>
-        <ListGroup as="ol">
-          {
-            candidates.map(cand => (
-              <ListGroup.Item
-                key={cand.name}
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-                disabled={!cand.active}
-              >
-                <div className="ms-2 me-auto">
-                  <div>{cand.name}</div>
-                  {cand.date} - {cand.time}
-                </div>
-                {
-                  !cand.feedback ? (
-                    <Button disabled={cand.feedback} to="/feedback-form" as={NavLink} >
-                      Create Feedback
-                    </Button>
-                  ) : (
-                    <Button disabled={cand.feedback} variant="secondary">
-                      Feedback Sent
-                    </Button>
-                  )
-                }
-              </ListGroup.Item>
-            ))
-          }
-        </ListGroup>
+        {
+          (selectedCandidate === null) ? (
+            <ListGroup as="ol">
+              {
+                candidates.map(cand => (
+                  cand.active && !cand.feedback && (
+                    <ListGroup.Item
+                      action
+                      key={cand.name}
+                      as="li"
+                      className="d-flex justify-content-between align-items-start"
+                    >
+                      <div className="ms-2 me-auto">
+                        <div>{cand.name}</div>
+                        {cand.date} - {cand.time}
+                      </div>
+                      <Button onClick={() => onSetSelectedCandidate(cand)}>
+                        Create Feedback
+                      </Button>
+                    </ListGroup.Item>
 
+                  )
+                ))
+              }
+            </ListGroup>
+          ) : (
+            <FeedbackForm/>
+          )
+        }
       </HomeComp>
     </SectionWrapper>
   )

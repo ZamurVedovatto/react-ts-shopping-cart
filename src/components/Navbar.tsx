@@ -1,4 +1,4 @@
-import { Button, Container, Nav, Navbar as NavbarBs } from "react-bootstrap"
+import { Button, Dropdown, Container, Nav, Navbar as NavbarBs } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
 import styled from "styled-components";
 import { useShoppingCart } from "../context/ShoppingCartContext"
@@ -14,6 +14,15 @@ const NavbarComp = styled.nav`
     .nav {
       max-width: 1040px;
       border: none;
+      .nav-item {
+        .nav-link {
+          text-transform: uppercase;
+          font-size: .8rem;
+          &.active {
+            font-weight: bold;
+          }
+        }
+      }
     }
   }
 `
@@ -24,13 +33,18 @@ export function Navbar() {
       <NavbarBs sticky="top" className="navbarbs shadow-sm">
         <Container>
           <Nav className="me-auto">
-            <Nav.Link className="text-light" to="/" as={NavLink}>
+            <Nav.Link className="text-light text-uppercase" to="/" as={NavLink}>
               Assessment Feedback Tool
             </Nav.Link>
           </Nav>
-          <Button>
-            ZV
-          </Button>
+          <Dropdown>
+            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+              ZV
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Container>
       </NavbarBs>
       <div className="tabs-area pt-5">
