@@ -9,12 +9,12 @@ const FeedbackFormComp = styled.section`
 
 function RadioField ({ max }) {
   return (
-    <Form.Group className="mb-5" controlId="formBasicCheckbox">
+    <Form.Group controlId="formBasicCheckbox">
       {[...Array(max)].map((x, i) =>
         <Form.Check
           inline
           label={i+1}
-          name={`group${i+1}`}
+          name={`group${x}`}
           type="radio"
         />
       )}
@@ -39,14 +39,14 @@ export function FeedbackForm() {
             <Form>
               {
                 formFields?.map((field) => (
-                  <Form.Group key={field.title} className="mb-5" controlId="formBasicEmail">
+                  <Form.Group key={field.title} className="mb-2" controlId="formBasicEmail">
                     <Form.Label className="pe-3">{field.title}</Form.Label>
                     <RadioField max={field.max}></RadioField>
                   </Form.Group>
                 ))
               }
 
-              <Form.Group className="mb-5" controlId="formBasicPassword">
+              <Form.Group className="mb-2" controlId="formBasicPassword">
                 <FloatingLabel controlId="floatingTextarea2" label="Comments">
                   <Form.Control
                     as="textarea"
@@ -56,7 +56,7 @@ export function FeedbackForm() {
                 </FloatingLabel>
               </Form.Group>
 
-              <Form.Group className="d-flex justify-content-end g-2" controlId="formBasicPassword">
+              <Form.Group className="d-flex justify-content-end mt-4" controlId="formBasicPassword">
                 <Button className="m-1" variant="outline-secondary" onClick={() => onSetSelectedCandidate(null)}>Cancel</Button>
                 <Button className="m-1" variant="primary" type="submit">
                   Submit
